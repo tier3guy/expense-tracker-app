@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import { View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { useFonts } from "expo-font";
 
-export default function App() {
+// Screens
+import AppStack from "./screens/app";
+import OnBoardingScreen from "./screens/auth/OnBoardingScreen";
+
+export default function Main() {
+  const [fontsLoaded, fontError] = useFonts({
+    poppins: require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "poppins-semibold": require("./assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    "poppins-bold": require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
+    "poppins-light": require("./assets/fonts/Poppins/Poppins-Light.ttf"),
+  });
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
+      <StatusBar barStyle="light-content" />
+      <AppStack />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
